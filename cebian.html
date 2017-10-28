@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>侧边导航栏</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+
+		body{
+			color: #333;
+			background-color: #fff;
+			font:12px/20px Arial,"宋体";
+		}
+		.rightNav{
+			position: fixed;
+			width: 140px;
+			right: 0;
+			top:100px;
+			text-align: left;
+			cursor: pointer;
+		}
+		.rightNav a{
+          display:block;
+          position: relative;
+          height: 30px;
+          line-height: 30px;
+          margin-bottom: 2px;
+          background-color: #fff;
+          padding-right: 10px;
+          width: 130px;
+          overflow: hidden;
+          cursor: pointer;
+          right: 110px;
+          color: #333;
+          text-decoration: none;
+          outline: none;
+          right: -110px;
+		}
+		.rightNav a em{
+			display: block;
+			float: left;
+			width: 30px;
+			background-color: #39a4dc;
+			color: #fff;
+			font-size: 16px;
+			text-align: center;
+			margin-right: 10px;
+		}
+
+		.rightNav a:hover em{
+			background-color: green;
+		}
+
+		.rightNav a:hover{
+			color: #39a4dc;
+		}
+
+		.rightNav a.new em{
+			background-color: #f60;
+		}
+
+	</style>
+</head>
+<body>
+<div class="rightNav">
+	<a href=""><em><</em>回到顶部</a>
+	<a href=""><em>1</em>书签切换</a>
+	<a href=""><em>2</em>幻灯片</a>
+	<a href=""><em>3</em>图片滚动-左</a>
+	<a href=""><em>4</em>图片滚动-右</a>
+	<a href=""><em>5</em>图片无缝滚动-左</a>
+	<a href=""><em>6</em>图片无缝滚动-右</a>
+	<a href=""><em>7</em>文字滚动-左</a>
+	<a href=""><em>8</em>文字滚动-上</a>
+	<a href=""><em>9</em>文字无缝滚动-左</a>
+	<a href=""><em>10</em>文字无缝滚动-上</a>
+	<a href="" class="new"><em>11</em>常用导航[v2.1]</a>
+	<a href="" class="new"><em>12</em>手风琴[v2.1]</a>
+	<a href=""><em>T1</em>其它基础效果</a>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+
+	//设置定时器
+	var timer;
+	$(".rightNav").hover(function(){
+			var thisObject = $(this);	
+			//添加定时器，延迟200毫秒执行
+			timer = setTimeout(function(){
+			thisObject.find("a").each(function(i){
+				var tA=$(this);
+				setTimeout(function(){ tA.animate({right:"0"},200);},50*i);
+			});
+		},200);
+
+	},
+//鼠标移开时执行的方法
+	function(){
+		//如果存在准备执行的定时器，立即清除定时器，只有当前停留时间大于200毫秒时开始执行
+		if(timer){ clearTimeout(timer);}
+		$(this).find("a").each(function(i){
+			var tA=$(this);
+			setTimeout(function(){ tA.animate({right:"-110"},200);},50*i);
+		});
+
+	});
+
+</script>
+</html>
